@@ -9,22 +9,28 @@
 
 
 uint8_t rx_buffer[numOfBytes];
-
+int activatePin = 2;
 void setup() {
   //initialize Serial
   Serial.begin(9600);
   // initialize SPI:
   SPI.begin();
+  pinMode(activatePin, OUTPUT);
+  digitalWrite(activatePin, LOW);
+  pinMode(3, INPUT_PULLUP);
 }
 
 void loop() {
-  int activatePin = 3;
-  pinMode(activatePin, OUTPUT);
+  
+  if(digitalRead(3))
+  {
   unsigned int mydata1 = 0;
   unsigned int mydata2 = 0;
   //TODO: loop to compere the two datas
   ReadRM22DC(mydata1, activatePin);
   ReadRM22DC(mydata2, activatePin);
+  }
+  
 
 }
 
